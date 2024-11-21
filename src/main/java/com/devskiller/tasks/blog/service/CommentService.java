@@ -2,6 +2,7 @@ package com.devskiller.tasks.blog.service;
 
 import java.util.List;
 
+import com.devskiller.tasks.blog.repository.PostRepository;
 import org.springframework.stereotype.Service;
 
 import com.devskiller.tasks.blog.model.dto.CommentDto;
@@ -10,6 +11,11 @@ import com.devskiller.tasks.blog.model.dto.NewCommentDto;
 @Service
 public class CommentService {
 
+	private final PostRepository postRepository;
+
+	public CommentService(PostRepository postRepository) {
+		this.postRepository = postRepository;
+	}
 	/**
 	 * Returns a list of all comments for a blog post with passed id.
 	 *
@@ -17,8 +23,14 @@ public class CommentService {
 	 * @return list of comments sorted by creation date descending - most recent first
 	 */
 	public List<CommentDto> getCommentsForPost(Long postId) {
+		try{
+			//get all comment from
+			postRepository.findAllById().;
+			//sort
 
-		throw new UnsupportedOperationException(/*TODO*/);
+		}catch (Exception e){
+			throw new UnsupportedOperationException(/*TODO*/);
+		}
 	}
 
 	/**
@@ -32,8 +44,10 @@ public class CommentService {
 	 */
 	public Long addComment(Long postId, NewCommentDto newCommentDto) {
 		try{
-			postRepository.
-		}catch ()
-		throw new UnsupportedOperationException(/*TODO*/);
+
+		}catch (Exception e){
+			throw new UnsupportedOperationException(/*TODO*/);
+		}
+
 	}
 }

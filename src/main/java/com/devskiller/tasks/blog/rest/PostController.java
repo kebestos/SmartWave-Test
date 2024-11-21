@@ -21,8 +21,6 @@ public class PostController {
 
 	private final PostService postService;
 
-	private final CommentService commentService;
-
 
 	public PostController(PostService postService) {
 		this.postService = postService;
@@ -60,6 +58,7 @@ public class PostController {
 		try{
 
 			List<CommentDTO> commentDTOS = commentService.getCommentsForPost(id);
+
 
 
 			return new ResponseEntity<>(commentDTOS, HttpStatus.CREATED);
