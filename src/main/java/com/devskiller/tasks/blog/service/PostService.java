@@ -4,7 +4,7 @@ import com.devskiller.tasks.blog.model.dto.PostDto;
 import com.devskiller.tasks.blog.repository.PostRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
+import java.util.List;
 
 @Service
 public class PostService {

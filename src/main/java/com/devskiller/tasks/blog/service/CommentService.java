@@ -25,7 +25,7 @@ public class CommentService {
 	public List<CommentDto> getCommentsForPost(Long postId) {
 		try{
 			//get all comment from
-			postRepository.findAllById().;
+			postRepository.findAllById();
 			//sort
 
 		}catch (Exception e){
@@ -48,6 +48,5 @@ public class CommentService {
 		}catch (Exception e){
 			throw new UnsupportedOperationException(/*TODO*/);
 		}
-
 	}
 }
