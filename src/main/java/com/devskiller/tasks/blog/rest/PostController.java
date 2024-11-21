@@ -41,8 +41,8 @@ public class PostController {
 	public ResponseEntity<CommentDto> createNewComment(@PathVariable Long id) {
 		try{
 			PostDto post = postService.getPost(id);
-
-			return CommentService.addComment(id,newComment);
+			NewCommentDto newCommentDto = new NewCommentDto("test","test");
+			Long id = CommentService.addComment(id,newCommentDto);
 			return new ResponseEntity<>(CommentDto, HttpStatus.CREATED);
 		} catch (Exception e) {
 			//provide exception information in body and log

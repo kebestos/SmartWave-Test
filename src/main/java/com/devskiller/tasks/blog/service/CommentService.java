@@ -30,6 +30,9 @@ public class CommentService {
 	 * @throws IllegalArgumentException if postId is null or there is no blog post for passed postId
 	 */
 	public Long addComment(Long postId, NewCommentDto newCommentDto) {
+		try{
+			postRepository
+		}catch ()
 		throw new UnsupportedOperationException(/*TODO*/);
 	}
 }
