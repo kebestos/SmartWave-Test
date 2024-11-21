@@ -21,6 +21,8 @@ public class PostController {
 
 	private final PostService postService;
 
+	private final CommentService commentService;
+
 
 	public PostController(PostService postService) {
 		this.postService = postService;
@@ -56,7 +58,10 @@ public class PostController {
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<List<CommentDTO>> createNewComment(@PathVariable Long id) {
 		try{
-			List<CommentDTO> commentDTOS = postService.getPost(id);
+
+			List<CommentDTO> commentDTOS = commentService.getCommentsForPost(id);
+
+
 			return new ResponseEntity<>(commentDTOS, HttpStatus.CREATED);
 		} catch (Exception e) {
 			//provide exception information in body and log
