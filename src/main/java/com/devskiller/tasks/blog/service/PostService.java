@@ -1,5 +1,6 @@
 package com.devskiller.tasks.blog.service;
 
+import com.devskiller.tasks.blog.model.Post;
 import org.springframework.stereotype.Service;
 
 import com.devskiller.tasks.blog.model.dto.PostDto;
@@ -18,5 +19,11 @@ public class PostService {
 		return postRepository.findById(id)
 				.map(post -> new PostDto(post.getTitle(), post.getContent(), post.getCreationDate()))
 				.orElse(null);
+	}
+
+	public PostDto createNewComment(Long id){
+		return postRepository.save(id)
+			.map(post -> new PostDto(post.getTitle(), post.getContent(), post.getCreationDate()))
+			.orElse(null);
 	}
 }

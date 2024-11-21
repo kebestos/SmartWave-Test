@@ -1,5 +1,6 @@
 package com.devskiller.tasks.blog.rest;
 
+import com.devskiller.tasks.blog.service.CommentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.devskiller.tasks.blog.model.dto.PostDto;
 import com.devskiller.tasks.blog.service.PostService;
+
+import java.util.List;
 
 @Controller
 @RestController
@@ -29,5 +32,22 @@ public class PostController {
 		return postService.getPost(id);
 	}
 
+
+//	POST at /posts/{id}/comments which should:
+//	Save a new comment with current date and time for post with passed {id}
+//	Return 201 Created if comment is created successfully for post with passed {id}
+//	Return 404 Not Found if post with passed {id} does not exist
+	@PostMapping(value = "/{id}/comments")
+	public ResponseEntity<CommentDto> createNewComment(@PathVariable Long id) {
+		try{
+			PostDto post = postService.getPost(id);
+
+			return CommentService.addComment(id,newComment);
+			return new ResponseEntity<>(CommentDto, HttpStatus.CREATED);
+		} catch (Exception e) {
+			//provide exception information in body and log
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
 
 }
