@@ -43,11 +43,24 @@ public class PostController {
 			PostDto post = postService.getPost(id);
 			NewCommentDto newCommentDto = new NewCommentDto("test","test");
 			Long id = CommentService.addComment(id,newCommentDto);
-			return new ResponseEntity<>(CommentDto, HttpStatus.CREATED);
+			return new ResponseEntity<>(commentDto, HttpStatus.CREATED);
 		} catch (Exception e) {
 			//provide exception information in body and log
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 
+//	GET at /posts/{id}/comments which should:
+//	Return all comments sorted by creation date in descending order for a post with passed {id}
+//	Return empty list if a post with passed {id} does not exists or when it does not contain any comments
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<List<CommentDTO>> createNewComment(@PathVariable Long id) {
+		try{
+			List<CommentDTO> commentDTOS = postService.getPost(id);
+			return new ResponseEntity<>(commentDTOS, HttpStatus.CREATED);
+		} catch (Exception e) {
+			//provide exception information in body and log
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+  }
 }

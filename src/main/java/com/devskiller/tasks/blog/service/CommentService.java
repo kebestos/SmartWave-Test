@@ -31,7 +31,7 @@ public class CommentService {
 	 */
 	public Long addComment(Long postId, NewCommentDto newCommentDto) {
 		try{
-			postRepository
+			postRepository.
 		}catch ()
 		throw new UnsupportedOperationException(/*TODO*/);
 	}

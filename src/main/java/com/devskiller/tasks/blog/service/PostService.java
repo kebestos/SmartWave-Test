@@ -18,4 +18,10 @@ public class PostService {
 				.map(post -> new PostDto(post.getTitle(), post.getContent(), post.getCreationDate()))
 				.orElse(null);
 	}
+
+	public List<PostDto> getPosts(Long id) {
+		return postRepository.findById(id)
+			.map(post -> new PostDto(post.getTitle(), post.getContent(), post.getCreationDate()))
+			.orElse(null);
+	}
 }
