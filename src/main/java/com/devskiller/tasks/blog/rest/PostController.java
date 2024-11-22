@@ -35,33 +35,33 @@ public class PostController {
 	}
 
 
-//	POST at /posts/{id}/comments which should:
-//	Save a new comment with current date and time for post with passed {id}
-//	Return 201 Created if comment is created successfully for post with passed {id}
-//	Return 404 Not Found if post with passed {id} does not exist
+	/**
+	POST at /posts/{id}/comments which should:
+	Save a new comment with current date and time for post with passed {id}
+	Return 201 Created if comment is created successfully for post with passed {id}
+	Return 404 Not Found if post with passed {id} does not exist*
+	*/
 	@PostMapping(value = "/{id}/comments")
-	public ResponseEntity<CommentDto> createNewComment(@PathVariable Long id) {
+	public ResponseEntity<Long> createNewComment(@PathVariable Long id, @RequestBody NewCommentDto newCommentDto) {
 		try{
-			PostDto post = postService.getPost(id);
-			NewCommentDto newCommentDto = new NewCommentDto("test","test");
-			Long id = CommentService.addComment(id,newCommentDto);
-			return new ResponseEntity<>(commentDto, HttpStatus.CREATED);
+			Long idNewComment = commentService.addComment(id,newCommentDto);
+			return new ResponseEntity<>(idNewComment, HttpStatus.CREATED);
 		} catch (Exception e) {
-			//provide exception information in body and log
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 
-//	GET at /posts/{id}/comments which should:
-//	Return all comments sorted by creation date in descending order for a post with passed {id}
-//	Return empty list if a post with passed {id} does not exists or when it does not contain any comments
+	/**
+	 GET at /posts/{id}/comments which should:
+	Return all comments sorted by creation date in descending order for a post with passed {id}
+	Return empty list if a post with passed {id} does not exists or when it does not contain any comments
+	 */
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<List<CommentDto>> getCommentsForPost(@PathVariable Long id) {
 		try{
 			List<CommentDto> commentDTOS = commentService.getCommentsForPost(id);
 			return new ResponseEntity<>(commentDTOS, HttpStatus.OK);
 		} catch (Exception e) {
-			//provide exception information in body and log
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
   }

@@ -4,8 +4,6 @@ import com.devskiller.tasks.blog.model.dto.PostDto;
 import com.devskiller.tasks.blog.repository.PostRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class PostService {
 
@@ -19,11 +17,5 @@ public class PostService {
 		return postRepository.findById(id)
 				.map(post -> new PostDto(post.getTitle(), post.getContent(), post.getCreationDate()))
 				.orElse(null);
-	}
-
-	public List<PostDto> getPosts(Long id) {
-		return postRepository.findAllBy(id)
-			.map(post -> new PostDto(post.getTitle(), post.getContent(), post.getCreationDate()))
-			.orElse();
 	}
 }
